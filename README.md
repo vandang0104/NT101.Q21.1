@@ -24,3 +24,33 @@ B3: Tìm từng chữ cái của khóa
 - Độ dịch chuyển có X^2 min là chữ cái đúng của cột đó. Ghép L chữ cái tại, ta có Key
 B4: Giải mã
 - Lấy khóa vừa tìm được áp dụng giải thuật Vigenere tìm ra plaintext
+
+---Bai2.7 Encrypt và Decrypt bằng Affine Encryption
+Logic: 
+Mã hóa plaintext theo công thức
+    E(x) = (a * x + b) mod 26
+    Với K(a,b) là key trong đó a là số có ước chung lớn nhất với 26 = 1 
+    x là chữ cái
+
+Giải mã cipher text theo công thức 
+    D(y) = a^-1 * (y - b) mod 26
+    Với K(a,b) là key trong đó a là số có ước chung lớn nhất với 26 = 1 
+    y là chữ cái
+
+Các bước thực thi:
+* B1: Chọn key 
+Giả sử chọn K(5,8)
+- Kiểm tra gcd(5,26) = 1 hợp lệ 
+- Tìm nghịch đảo của a module cho 26 là 21 
+Vì sao lại chọn là 21 với a là 5 vì theo công thức 
+nếu theo toán học bình thường để 1/5 thì sẽ không giải mã được vì nó là số thập phân
+
+mà theo công thức D(y) = a^-1 * (y - b) mod 26
+<=> D(y) = a^-1 * ((a * x + b) - b) mod 26
+<=> D(y) = (a^-1 * a) * x mod 26
+cần tìm (a^-1 * a) mod 26 = 1 thì mới thỏa x = x 
+nên ta duyệt từ 1 với 26 để tìm ra số thỏa là được 
+* B2: Mã hóa
+Lấy chỉ số của từng chữ cái thay vào công thức tìm ra chỉ số của chữ cái sau khi mã hóa
+* B3: Giải mã
+Lấy chỉ số của từng chữ cái thay vào công thức tìm ra chỉ số của chữ cái sau khi giải mã (nên nhớ phải tìm a^-1 trước bằng hàm modInverse)
