@@ -10,7 +10,7 @@ int main() {
     cin >> m ;
     for(int i=0;i<n.size();++i){
         char c = n[i] ;
-        if(n[i] == ' '|| n[i] == ',' || n[i] == '.'){
+        if(!isalpha(c)){
             result +=c ;
             continue ;
         }

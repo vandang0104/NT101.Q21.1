@@ -43,25 +43,36 @@ void createMatrix(string key){
         for(int j=0;j<5;j++){
             matrix[i][j] = s[k];
             pos[s[k]-'A'] = {i,j};
+            if (s[k] == 'I') pos['J' - 'A'] = {i, j};
             k++;
         }
     }
 }
 
 string makePairs(string text){
-    string r="";
+    string r = "";
     text = clean(text);
 
-    for(int i=0;i<text.size();i++){
-        r+=text[i];
-        if(i+1<text.size()){
-            if(text[i]==text[i+1]){
-                r+='X';
+    int i = 0;
+    while(i < text.length()){
+        char c1 = text[i];
+        if(i + 1 < text.length()){
+            char c2 = text[i+1];
+            if(c1 == c2){
+                r += c1;
+                r += 'X';
+                i += 1; 
+            } else {
+                r += c1;
+                r += c2;
+                i += 2; 
             }
+        } else {
+            r += c1;
+            r += 'X';
+            i += 1;
         }
     }
-
-    if(r.size()%2) r+='X';
 
     return r;
 }
@@ -100,9 +111,10 @@ int main(){
 
     string key ;
     cout << "nhap key(Khong cach, so, ki tu): "  ;
-    cin >> key ;
+    getline(cin, key);
     string text ;
-    cin >> text ;
+    cout << "nhap plain text: " ;
+    getline(cin, text);
 
     createMatrix(key);
 
