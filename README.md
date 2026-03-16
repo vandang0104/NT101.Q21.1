@@ -3,11 +3,19 @@ Logic: Lấy tần suất của từ xuất hiện nhiều nhất trong input - 
 
 --- Bài 2.2  mono-alphabetic substitution cipher
 Ý tưởng :  Sử dụng pp Phân Tích tần suất thay vì brute force. Ta thống kê các chữ cái xuất hiện nhiều nhất trong bản mã và so sánh với từ xuất hiện nhiều nhất trong từ điển tiếng anh cứ thế giảm dần theo tần suất trong từ điển, đến khi gặp đoạn text đọc được thì dừng lại
+
+--- Bài 2.3  mono-alphabetic
+substitution cipher
+
+
+
 ---Bai2.4 Fairplay
 Logic:
 - Tạo matrix key bằng cách thêm key vào 1 string và đánh dấu từng chữ cái đã xuất hiện vào 1 set, sau đó đẩy các chữ cái còn lại vào đồng thời kiểm tra chữ cái đó đã xuất hiện chưa. Cuối cùng đẩy vào mảng 5x5
 - Tạo pair bằng cách lọc qua text nếu có chữ cái trùng thì thêm X vào giữa 2 chữ đó. Đến cuối nếu text length = lẻ thì thêm X vào cuối
 -Tạo cipher text bằng cách xét 3 trường hợp nếu cùng hàng thì lấy bên phải, cùng cột thì lấy bên dưới (nếu lớn hơn 5 thì %5). Nếu không thuộc 2 trường hợp trên thì đổi chỉ số cột trong matrix của 2 kí tự cho nhau
+
+
 --- Bài 2.5 mã hóa  Vigenère
 Logic : là sự mở rộng của mã hóa Caesar, nhưng thay vì dùng một độ dời cố định, chúng ta dùng một chuỗi độ dời - khóa lặp lại
 B1 : Làm sạch input
@@ -22,6 +30,7 @@ B3: Hàm mã hóa và giải mã
 +Mã hóa: Cộng giá trị bản rõ với khóa.
 +Giải mã: Trừ giá trị khóa khỏi bản mã (cộng thêm 26 để tránh số âm).
 -	Kết quả: Lấy dư cho 26 để kết quả luôn nằm trong bảng chữ cái và chuyển ngược lại thành ký tự.
+
 ---Bai2.6 Decrypt VIGENERE Encryption
 Logic:
 B1: Làm sạch input
@@ -59,7 +68,6 @@ Giả sử chọn K(5,8)
 - Tìm nghịch đảo của a module cho 26 là 21 
 Vì sao lại chọn là 21 với a là 5 vì theo công thức 
 nếu theo toán học bình thường để 1/5 thì sẽ không giải mã được vì nó là số thập phân
-
 mà theo công thức D(y) = a^-1 * (y - b) mod 26
 <=> D(y) = a^-1 * ((a * x + b) - b) mod 26
 <=> D(y) = (a^-1 * a) * x mod 26
