@@ -1,12 +1,27 @@
 ---Bài 2.1 Sử dụng Frequency Analysis
 Logic: Lấy tần suất của từ xuất hiện nhiều nhất trong input - tần suất xuất hiện từ trong tiếng anh từ lớn tới thấp để + 26 % 26. Xét từng trường hợp để xem đoạn text nào có ý nghĩa nhất thì dừng chương trình
 
+--- Bài 2.2  mono-alphabetic substitution cipher
+Ý tưởng :  Sử dụng pp Phân Tích tần suất thay vì brute force. Ta thống kê các chữ cái xuất hiện nhiều nhất trong bản mã và so sánh với từ xuất hiện nhiều nhất trong từ điển tiếng anh cứ thế giảm dần theo tần suất trong từ điển, đến khi gặp đoạn text đọc được thì dừng lại
 ---Bai2.4 Fairplay
 Logic:
 - Tạo matrix key bằng cách thêm key vào 1 string và đánh dấu từng chữ cái đã xuất hiện vào 1 set, sau đó đẩy các chữ cái còn lại vào đồng thời kiểm tra chữ cái đó đã xuất hiện chưa. Cuối cùng đẩy vào mảng 5x5
 - Tạo pair bằng cách lọc qua text nếu có chữ cái trùng thì thêm X vào giữa 2 chữ đó. Đến cuối nếu text length = lẻ thì thêm X vào cuối
 -Tạo cipher text bằng cách xét 3 trường hợp nếu cùng hàng thì lấy bên phải, cùng cột thì lấy bên dưới (nếu lớn hơn 5 thì %5). Nếu không thuộc 2 trường hợp trên thì đổi chỉ số cột trong matrix của 2 kí tự cho nhau
-
+--- Bài 2.5 mã hóa  Vigenère
+Logic : là sự mở rộng của mã hóa Caesar, nhưng thay vì dùng một độ dời cố định, chúng ta dùng một chuỗi độ dời - khóa lặp lại
+B1 : Làm sạch input
+- Xóa các dấu câu và khoảng trắng
+- Viết hoa toàn bộ
+B2 : Logic lặp khóa
+-	 Sử dụng phép toán chia lấy dư với độ dài khóa m
+-	Công thức: key x [i % m]. Khi chỉ số i tăng vượt quá độ dài khóa, phép % m sẽ đưa nó quay lại từ đầu , giúp khóa tự động lặp lại cho đến khi hết văn bản
+B3: Hàm mã hóa và giải mã
+-	Xoay vòng khóa: Dùng phép toán % để lặp lại khóa cho đến khi hết văn bản.
+-	Biến đổi số: Đưa chữ cái về dạng số (0-25) rồi thực hiện phép tính:
++Mã hóa: Cộng giá trị bản rõ với khóa.
++Giải mã: Trừ giá trị khóa khỏi bản mã (cộng thêm 26 để tránh số âm).
+-	Kết quả: Lấy dư cho 26 để kết quả luôn nằm trong bảng chữ cái và chuyển ngược lại thành ký tự.
 ---Bai2.6 Decrypt VIGENERE Encryption
 Logic:
 B1: Làm sạch input
