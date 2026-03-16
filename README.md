@@ -6,7 +6,22 @@ Logic: Lấy tần suất của từ xuất hiện nhiều nhất trong input - 
 
 --- Bài 2.3  mono-alphabetic
 substitution cipher
-
+Logic:
+Thay vì thử sai toàn bộ 26! trường hợp , thuật toán sử dụng cơ chế tiến dần dần. Nó dựa trên xác suất thống kê của ngôn ngữ cụm 3 chữ cái để đánh giá xem một bản giải mã có gần với tiếng Anh chuẩn hay không, từ đó liên tục cải thiện khóa cho đến khi tìm được kết quả đúng.
+B1: Học đặc điểm ngôn ngữ 
+•    Thu thập dữ liệu: Đọc một văn bản tiếng Anh mẫu thống kê tần suất xuất hiện của các cụm 3 chữ cái tiếng anh hay xuất hiện như THE, ING, AND...
+•    Tính toán trọng số: Chuyển tần suất sang dạng thang đo Logarith để biến các phép nhân xác suất phức tạp thành phép cộng đơn giản, giúp máy tính chạy nhanh hơn.
+B2: Chấm điểm bản giải mã
+•    Nguyên lý: Một bản giải mã đúng sẽ chứa nhiều cụm từ quen thuộc của tiếng Anh.
+•    Cách tính: Duyệt qua văn bản đã giải mã, cộng điểm từ bảng trọng số ở B1. Nếu gặp cụm chữ cái lạ chương trình sẽ trừ điểm thật nặng. Điểm càng cao, bản dịch càng gần với thực tế.
+B3: Thuật toán leo núi - Hill Climbing 
+Khởi tạo: Tạo một khóa ngẫu nhiên (hoán vị của 26 chữ cái).
+Đột biến: Thử hoán đổi vị trí của 2 chữ cái bất kỳ trong khóa hiện tại.
+So sánh: Nếu khóa mới cho điểm số cao hơn khóa cũ, ta giữ lại khóa mới và tiếp tục cải thiện từ đó.
+Lặp lại : Để tránh bị kẹt ở "đỉnh núi thấp" (kết quả gần đúng nhưng chưa chuẩn), thuật toán sẽ bắt đầu lại với khóa ngẫu nhiên mới nhiều lần (max_restarts) và chọn ra kết quả cao nhất trong tất cả các lần chạy.
+B4: Giải mã giữ nguyên định dạng
+•    Ánh xạ (Mapping): Sử dụng bảng thay thế (str.maketrans) để ánh xạ đồng thời cả chữ HOA và chữ thường.
+•    Bảo toàn cấu hình: Chỉ thay thế các ký tự nằm trong bảng chữ cái, các dấu câu, khoảng trắng và xuống dòng được giữ nguyên để đảm bảo văn bản sau khi phá mã vẫn dễ đọc và đúng định dạng gốc.
 
 
 ---Bai2.4 Fairplay
