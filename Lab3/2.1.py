@@ -107,6 +107,7 @@ print("Bản mã Base64 là:", ban_ma_b64)
 # ===============================================
 # --- CÂU 4: GIẢI MÃ TÌM BẢN RÕ  ---
 # ===============================================
+
 print("\n=== KẾT QUẢ CÂU 4 ===")
 
 danh_sach_khoa = [
@@ -115,9 +116,6 @@ danh_sach_khoa = [
     ("Khóa 3", d3, n3)
 ]
 
-# ===============================================
-# 1. GIỮ NGUYÊN BẢN MÃ DƯỚI DẠNG BYTES (Không ép thành int)
-# ===============================================
 c1_b64 = "raUcesUlOkx/8ZhgodMoo0Uu18sC20yXlQFevSu7W/FDxIy0YRHMyXcHdD9PBvIT2aUft5fCQEGomiVVPv4I"
 c2_hex = "C87F570FC4F699CEC24020C6F54221ABAB2CE0C3"
 c3_b64 = "Z2BUSkJcg0w4XEpgm0JcMExEQmBlVH6dYEpNTHpMHptMQ7NgTHlgQrNMQ2BKTQ=="
@@ -126,7 +124,6 @@ c4_bin = "0010100000010100111111111011011100101110110010101110110001100111101111
 c1_bytes = base64.b64decode(c1_b64)
 c2_bytes = bytes.fromhex(c2_hex)
 c3_bytes = base64.b64decode(c3_b64)
-# Binary là trường hợp duy nhất cần ép qua int để lấy bytes vừa đủ
 c4_so = int(c4_bin, 2)
 c4_bytes = c4_so.to_bytes((len(c4_bin) + 7) // 8, byteorder='big')
 
@@ -137,18 +134,13 @@ danh_sach_ban_ma = [
     ("Bản mã 4 (Binary)", c4_bytes)
 ]
 
-# ===============================================
-# 2. VÒNG LẶP GIẢI MÃ
-# ===============================================
 for ten_ban_ma, ban_ma_bytes in danh_sach_ban_ma:
     print(f"\nĐang thử mở {ten_ban_ma}...")
     mo_thanh_cong = False
 
     for ten_khoa, d, n in danh_sach_khoa:
-        k = (n.bit_length() + 7) // 8  # Lấy kích thước block của module n
+        k = (n.bit_length() + 7) // 8  
         
-        # SỬA LỖI 1 & 2: Nếu tổng chiều dài bản mã bị hụt do các công cụ tạo mã 
-        # nuốt mất byte 0x00 ở đầu, ta chủ động bù lại cho chẵn khối block k.
         so_du = len(ban_ma_bytes) % k
         if so_du != 0:
             ban_ma_bytes_padded = (b'\x00' * (k - so_du)) + ban_ma_bytes
@@ -156,28 +148,23 @@ for ten_ban_ma, ban_ma_bytes in danh_sach_ban_ma:
             ban_ma_bytes_padded = ban_ma_bytes
 
         giai_ma_bytes = b''
-
-        # Tiến hành chia block (lúc này đảm bảo không có block nào bị lọt sổ)
         for i in range(0, len(ban_ma_bytes_padded), k):
             block = ban_ma_bytes_padded[i:i+k]
             
             c = int.from_bytes(block, 'big')
             m = pow(c, d, n)
 
-            # Lấy số byte thực tế của bản rõ m, loại bỏ các byte 0 dư thừa
             m_bytes = m.to_bytes((m.bit_length() + 7) // 8, 'big')
             giai_ma_bytes += m_bytes
 
         try:
             text = giai_ma_bytes.decode('utf-8')
             
-            # SỬA LỖI 3: Phải đảm bảo text có nội dung thực sự (không phải chuỗi rỗng)
             if text.strip() != "" and text.isprintable():
                 print(f" -> THÀNH CÔNG! Dùng {ten_khoa}: '{text}'")
                 mo_thanh_cong = True
                 break
         except Exception:
-            # Nếu decode ra ký tự rác (lỗi mã hóa Unicode) thì bỏ qua thử khóa khác
             pass
 
     if not mo_thanh_cong:
