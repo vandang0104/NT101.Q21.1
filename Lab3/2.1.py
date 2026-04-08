@@ -15,9 +15,6 @@ def calculate_rsa_keys(p, q, e):
     
     return n, d
 
-# ==========================================
-# Trường hợp 1: Hệ thập phân (số nhỏ)
-# ==========================================
 p1 = 11
 q1 = 17
 e1 = 7
@@ -27,9 +24,6 @@ print("--- Trường hợp 1 ---")
 print(f"PU = ({e1}, {n1})")
 print(f"PR = ({d1}, {n1})\n")
 
-# ==========================================
-# Trường hợp 2: Hệ thập phân (số lớn)
-# ==========================================
 p2 = 20079993872842322116151219
 q2 = 676717145751736242170789
 e2 = 17
@@ -39,9 +33,6 @@ print("--- Trường hợp 2 ---")
 print(f"PU = ({e2}, {n2})")
 print(f"PR = ({d2}, {n2})\n")
 
-# ==========================================
-# Trường hợp 3: Hệ thập lục phân (Hexadecimal)
-# ==========================================
 # Chuyển đổi chuỗi Hex sang số nguyên hệ 10 để tính toán
 p3 = int("F7E75FDC469067FFDC4E847C51F452DF", 16)
 q3 = int("E85CED54AF57E53E092113E62F436F4F", 16)
@@ -49,7 +40,7 @@ e3 = int("0D88C3", 16)
 
 n3, d3 = calculate_rsa_keys(p3, q3, e3)
 
-# Chuyển kết quả ngược lại sang dạng Hex (bỏ tiền tố '0x' và viết hoa)
+# Chuyển kết quả ngược lại sang dạng Hex 
 n3_hex = hex(n3)[2:].upper()
 d3_hex = hex(d3)[2:].upper()
 e3_hex = hex(e3)[2:].upper()
